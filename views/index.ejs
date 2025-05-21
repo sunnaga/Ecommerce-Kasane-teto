@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
+    <title>Marketplace</title>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo"><a href="/">LOGO</a></div>
+
+        <div class="menu">
+            <ul>
+                <li><a href="shop"><i class="bi bi-shop-window"></i></a></li>
+                <li><a href="cart"><i class="bi bi-cart"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+
+
+        <section>
+            <div class="goodses-container item">
+                <h1>Merchantdise</h1>
+
+                <div class="grid">
+                    <% data.forEach(item=> {%>
+
+                        <div class="grid-item">
+                            <div class="img-con">
+                                <img src="<%=item.image%>" alt="">
+                            </div>
+                            <div class="infoCart">
+                                <div class="info">
+                                    <p class="name"><%=item.name%></p>
+                                    <p class="price"><%= parseInt(item.price).toLocaleString() %>$</p>
+                                </div>
+                                <form class="cart" method="post" action="/addCart">
+                                    <input type="hidden" name="name" value="<%=item.name%>">
+                                    <input type="hidden" name="price" value="<%=item.price%>">
+                                    <input type="hidden" name="img" value="<%=item.image%>">
+                                    <button type="submit"><i class="bi bi-cart"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    <%}); %>
+                </div>
+            </div>
+            <div class="sortBy-container item">
+                <h1>Sort by</h1>
+            </div>
+
+
+
+        </section>
+
+        <footer></footer>
+
+        <div class="alert-popup hidden">
+            <%= alert %>
+        </div>
+    </div>
+</body>
+
+<script>
+    let popup = document.querySelector('.alert-popup')
+
+    setTimeout(() => {
+        popup.classList.remove('hidden')
+    }, 1000);
+</script>
+
+</html>

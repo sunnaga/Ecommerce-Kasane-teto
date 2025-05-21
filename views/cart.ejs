@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/cart.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
+    <title>My cart</title>
+</head>
+
+<body>
+    <nav>
+        <div class="logo"><a href="/">LOGO</a></div>
+
+        <div class="menu">
+            <ul>
+                <li><a href="shop"><i class="bi bi-shop-window"></i></a></li>
+                <li><a href="/"><i class="bi bi-house"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <section>
+            <div class="inCart-container item">
+                <h1>List in cart</h1>
+
+                <ul class="list">
+                    <% data.forEach(item=> { %>
+                        <li class="goods">
+                            <div class="img-con">
+                                <img src=" <%= item.image %>" alt="">
+                            </div>
+                            <div class="info">
+                                <div class="name">
+                                    <h1>
+                                        <%= item.name %>
+                                    </h1>
+                                </div>
+                                <div class="price">
+                                    <%= item.price.toLocaleString() %>$
+                                </div>
+                            </div>
+                            <form action="/delete" method="post" class="delete">
+                                <input type="hidden" name="name" value="<%=item.name%>">
+                                <button type="submit">X</button>
+                            </form>
+
+                            <form action="/buy" method="post" class="buy">
+                                <input type="hidden" name="name" value="<%=item.name%>">
+                                <input type="hidden" name="price" value="<%= item.price %>">
+                                <input type="number" name="amout" id="" value="1" min="1" max="" placeholder="Quantity">
+                                <button type="submit">BUY</button>
+                            </form>
+
+                        </li>
+                        <% }) %>
+
+                </ul>
+            </div>
+
+            <div class="purchase-container item">
+                <h1>Purchase</h1>
+
+                <div class="form-con">
+                    <form action="/purchase" method="post" class="yourInfo-con">
+                        <ul>
+                            <% let total=0 %>
+
+                                <% lists.forEach(list=> {%>
+                                    <li>
+                                        <%= list.name%> x<%= list.amout%> : <br><%=(list.price*list.amout).toLocaleString(); %>$
+                                    </li>
+                                    <% total +=list.price*list.amout %>
+                                        <% }); %>
+                        </ul>
+                        <h1>Total : <%= total.toLocaleString() %>$ </h1>
+                    </form>
+
+
+                    <form action="" class="purchase-form">
+                        <p>Name *</p>
+                        <input type="text" name="name">
+                        <p>Address *</p>
+                        <input type="text" name="address">
+                        <p>Province *</p>
+                        <input type="text" name="province">
+                        <p>District *</p>
+                        <input type="text" name="district">
+                        <p>Postcode *</p>
+                        <input type="text" name="postcode">
+
+                        <button type="submit">Purchase</button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+</html>
