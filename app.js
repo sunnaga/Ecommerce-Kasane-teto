@@ -8,9 +8,9 @@ const path = require('path');
 const app = express();
 
 const db = mysql.createPool({
-    host: 'localhost',
-    user: 'root',           // เปลี่ยนตามเครื่องคุณ
-    password: 'sunnaga2020',           // หรือใส่ password
+    host: '',
+    user: '',          
+    password: '',           
     database: 'ecommerce'
 });
 
